@@ -35,7 +35,7 @@ node {
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh "docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
-	sh "docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/helloworldjava:$BUILD_NUMBER"
+	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
+	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/helloworldjava:$BUILD_NUMBER"
     }
 }
