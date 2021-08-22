@@ -29,6 +29,6 @@ node {
     stage('Build Docker Image') {
       // build docker image
 	//sh "docker build -t="hello-world-java" ."
-	sh "docker build -t HelloWorldJava:1 ."
+	sh "docker build -t helloworldjava:1 ."
     }
 }
