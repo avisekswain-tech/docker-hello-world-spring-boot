@@ -24,7 +24,8 @@ node {
       // build project via maven
       sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
     }
-	
+
+/*
 	stage('Publish Tests Results'){
       parallel(
         publishJunitTestsResultsToJenkins: {
@@ -36,6 +37,7 @@ node {
           echo "This is branch b"
       })
     }
+*/
 		
     stage('Build Docker Image') {
       // build docker image
@@ -45,7 +47,8 @@ node {
       
       dockerImage = docker.build("hello-world-java")
     }
-   
+ 
+ /*
     stage('Deploy Docker Image'){
       
       // deploy docker image to nexus
@@ -56,4 +59,5 @@ node {
       sh "docker tag ${dockerImageName} ${dockerImageTag}"
       sh "docker push ${dockerImageTag}"
     }
+*/
 }
