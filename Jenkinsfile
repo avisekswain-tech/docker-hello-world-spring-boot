@@ -25,10 +25,10 @@ node {
       //sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
 	sh  "/usr/share/maven/bin/mvn package"
     }
-		
+/*		
     stage('Build Docker Image') {
       // build docker image
 	sh docker build -t="hello-world-java" .
     }
- 
+ */
 }
