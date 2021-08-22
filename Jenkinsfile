@@ -28,13 +28,8 @@ node {
 		
     stage('Build Docker Image') {
       // build docker image
-      //sh "whoami"
-      //sh "ls -all /var/run/docker.sock"
-      //sh "mv ./target/hello*.jar ./data" 
-      
-      //dockerImage = docker.build("hello-world-java")
 	sh docker build -t="hello-world-java" .
-    }
+		}
  
  /*
     stage('Deploy Docker Image'){
