@@ -37,11 +37,13 @@ node {
 	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
 	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
     }
+	
     stage('Task Definition Creation')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
+	echo "${taskfamily}"
 //	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
 	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc1 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
-        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 3 --region us-east-1"
+        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1 --region us-east-1"
     }
 }
