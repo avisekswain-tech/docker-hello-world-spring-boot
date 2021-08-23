@@ -42,6 +42,6 @@ node {
 	{
 //	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
 	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc1 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
-        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1"
+        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1 --region us-east-1"
     }
 }
