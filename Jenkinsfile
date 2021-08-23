@@ -1,6 +1,6 @@
 pipeline {
     agent any
-//node {
+  node {
     //def dockerImage    
     //def dockerRepoUrl = "localhost:8083"
     //def dockerImageName = "hello-world-java"
@@ -48,4 +48,5 @@ pipeline {
 	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc1 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
         sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1 --region us-east-1"
     }
+}
 }
