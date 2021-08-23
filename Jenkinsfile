@@ -4,20 +4,6 @@
     def dockerImageName = "hello-world-java"
     def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     def taskfamily = "ecs-fargate-cluster-svc1"
-
-	  /*
-    environment {
-        branch_name = "master"
-        git_url = "https://github.com/pemmasani1200/DevOpsClassCodes.git"
-        SERVICE_NAME = "ecs-fargate-cluster-svc"
-        IMAGE_VERSION = "${BUILD_NUMBER}"
-        taskfamily = "ecs-fargate-cluster-svc1"
-        DESIRED_COUNT = "1"
-        REGION = "us-east-1"
-        CLUSTER_NAME = "ecs-fargate-cluster-test"
-	//ECR_REPO = "011194234014.dkr.ecr.us-east-2.amazonaws.com/irving"
-    }
-	*/
 	
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
