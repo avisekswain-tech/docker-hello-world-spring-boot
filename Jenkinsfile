@@ -3,6 +3,7 @@ node {
     def dockerRepoUrl = "localhost:8083"
     def dockerImageName = "hello-world-java"
     def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
+    def TASK_FAMILY = "ecs-fargate-cluster-svc1"
     
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
@@ -21,7 +22,7 @@ node {
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
-	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
+	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
+	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
     }
 }
