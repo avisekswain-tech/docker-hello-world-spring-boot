@@ -3,7 +3,7 @@ node {
     def dockerRepoUrl = "localhost:8083"
     def dockerImageName = "hello-world-java"
     def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
-    def TASK_FAMILY = "ecs-fargate-cluster-svc1"
+    def TASKFAMILY = "ecs-fargate-cluster-svc1"
     
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
@@ -28,7 +28,7 @@ node {
     stage('Task Definition Creation')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${TASK_FAMILY}.json > ${TASK_FAMILY}-${BUILD_NUMBER}.json'
-	sh 'aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TASK_FAMILY}-${BUILD_NUMBER}.json'
+	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${TASKFAMILY}.json > ${TASKFAMILY}-${BUILD_NUMBER}.json'
+	sh 'aws ecs register-task-definition --family ${TASKFAMILY} --cli-input-json file://${TASKFAMILY}-${BUILD_NUMBER}.json'
     }
 }
