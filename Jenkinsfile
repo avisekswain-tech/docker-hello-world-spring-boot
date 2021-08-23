@@ -23,7 +23,7 @@
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
 	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
-	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
+	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
     }
 	
     stage('Task Definition Creation')
