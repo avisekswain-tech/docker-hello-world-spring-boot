@@ -25,4 +25,10 @@ node {
 	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
 	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
     }
+    stage('Task Definition Creation')
+    withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
+	{
+	sh "sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${TASK_FAMILY}.json > ${TASK_FAMILY}-${BUILD_NUMBER}.json"
+	sh "aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TASK_FAMILY}-${BUILD_NUMBER}.json"
+    }
 }
