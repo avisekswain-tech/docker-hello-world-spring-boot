@@ -1,4 +1,6 @@
-node {
+pipeline {
+    agent any
+//node {
     //def dockerImage    
     //def dockerRepoUrl = "localhost:8083"
     //def dockerImageName = "hello-world-java"
