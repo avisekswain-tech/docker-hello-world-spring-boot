@@ -28,7 +28,7 @@ node {
     stage('Task Definition Creation')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
-	sh 'aws ecs register-task-definition --family ${taskfamily} --cli-input-json file://${taskfamily}-${BUILD_NUMBER}.json'
+//	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
+	sh 'aws ecs register-task-definition --family ${taskfamily} --cli-input-json file://${taskfamily}.json'
     }
 }
