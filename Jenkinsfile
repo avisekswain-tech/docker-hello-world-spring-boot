@@ -16,14 +16,14 @@
 		
     stage('Build Docker Image') {
       // build docker image
-	sh "sudo docker build -t helloworldjava:$BUILD_NUMBER ."
+	sh "sudo docker build -t helloworldjavatest:$BUILD_NUMBER ."
     }
 	
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
-	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
+	sh "sudo docker tag helloworldjavatest:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/testrepo:$BUILD_NUMBER"
+	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/testrepo:latest"
     }
 	
     stage('Task Definition Creation')
