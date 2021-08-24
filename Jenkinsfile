@@ -1,6 +1,6 @@
   node {
     def taskfamily1 = "ecs-fargate-cluster-svc1"    
-    def dockerRepoUrl = "localhost:8083"
+    def dockerRepoUrl = "localhost:80833"
     def dockerImageName = "hello-world-java"
     def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     def taskfamily = "ecs-fargate-cluster-svc1"
