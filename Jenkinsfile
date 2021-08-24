@@ -22,7 +22,7 @@
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
-	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:$BUILD_NUMBER"
+	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
 	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
     }
 	
@@ -31,7 +31,7 @@
 	{
 	echo "${taskfamily1}"
 //	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
-	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc1 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
-        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1 --region us-east-1"
+	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc3 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
+        sh "aws ecs update-service --cluster ecs-fargate-cluster-test3 --service ecs-fargate-cluster-svc3 --task-definition ecs-fargate-cluster-svc3 --desired-count 2 --region us-east-1"
     }
 }
