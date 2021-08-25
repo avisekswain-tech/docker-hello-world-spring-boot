@@ -33,12 +33,19 @@
 	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
     }
 	
-    stage('Task Definition Creation')
+    stage('Fargate TaskDefinition Creation')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
 	echo "${taskfamily1}"
 //	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
 	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc3 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
+    }
+	  
+    stage('Deploy to Fargate Cluster')
+    withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
+	{
+	echo "${taskfamily1}"
+//	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
         sh "aws ecs update-service --cluster ecs-fargate-cluster-test3 --service ecs-fargate-cluster-svc3 --task-definition ecs-fargate-cluster-svc3 --desired-count 2 --region us-east-1"
     }
 }
