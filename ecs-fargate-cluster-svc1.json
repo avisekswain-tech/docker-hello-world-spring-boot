@@ -1,5 +1,5 @@
 {
-  "family": "ecs-fargate-cluster-svc1",
+  "family": "ecs-fargate-cluster-svc4",
   "taskRoleArn": "",
   "executionRoleArn": "arn:aws:iam::474173922354:role/ECSTaskexecutionIAMrole-test",
   "networkMode": "awsvpc",
