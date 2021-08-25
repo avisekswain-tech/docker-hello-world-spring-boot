@@ -37,15 +37,13 @@
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
 	echo "${taskfamily1}"
-//	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
-	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc3 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
+	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc4 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
     }
 	  
     stage('Deploy to Fargate Cluster')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
 	echo "${taskfamily1}"
-//	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
-        sh "aws ecs update-service --cluster ecs-fargate-cluster-test3 --service ecs-fargate-cluster-svc3 --task-definition ecs-fargate-cluster-svc3 --desired-count 2 --region us-east-1"
+        sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count 2 --region us-east-1"
     }
 }
