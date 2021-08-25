@@ -8,8 +8,15 @@
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/dstar55/docker-hello-world-spring-boot.git'
-    }    
-  
+    }   
+/*	  
+    stage('Maven_Compile') {
+            sh  "/opt/maven/bin/mvn compile"
+    }
+    stage('Maven_unittesting') {
+            sh  "/opt/maven/bin/mvn test"
+    }
+ */
     stage('Build Project') {
 	sh  "/usr/share/maven/bin/mvn package"
     }
