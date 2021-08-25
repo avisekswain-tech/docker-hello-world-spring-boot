@@ -5,7 +5,7 @@
   "networkMode": "awsvpc",
   "containerDefinitions": [
     {
-      "name": "ecs-fargate-cluster-svc1",
+      "name": "ecs-fargate-cluster-svc4",
       "image": "474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest",
       "cpu": 256,
       "memory": 512,
