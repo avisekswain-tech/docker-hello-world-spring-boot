@@ -45,6 +45,6 @@
 	{
 	echo "${taskfamily1}"
         //sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count 2 --region us-east-1"
-	sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count "${prarams.taskcount}" --region us-east-1"
+	sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count "${taskcount}" --region us-east-1"
     }
 }
