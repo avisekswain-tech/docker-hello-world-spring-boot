@@ -26,6 +26,7 @@
 	sh "sudo docker build -t helloworldjavatest:$BUILD_NUMBER ."
     }
 	
+/*
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
@@ -52,4 +53,5 @@
         //sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count 2 --region us-east-1"
 	sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count ${taskcount} --region us-east-1"
     }
+*/
 }
