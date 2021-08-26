@@ -8,8 +8,15 @@
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/dstar55/docker-hello-world-spring-boot.git'
-    }    
-  
+    }   
+/*	  
+    stage('Maven_Compile') {
+            sh  "/opt/maven/bin/mvn compile"
+    }
+    stage('Maven_unittesting') {
+            sh  "/opt/maven/bin/mvn test"
+    }
+ */
     stage('Build Project') {
 	sh  "/usr/share/maven/bin/mvn package"
     }
@@ -22,16 +29,27 @@
     stage('Push Docker Image to ECR')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
+<<<<<<< HEAD
 	sh "sudo docker tag helloworldjavatest:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/testrepo:$BUILD_NUMBER"
 	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/testrepo:latest"
+=======
+	sh "sudo docker tag helloworldjava:$BUILD_NUMBER 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
+	sh "sudo docker push 474173922354.dkr.ecr.us-east-1.amazonaws.com/tomcatapp:latest"
+>>>>>>> 83100cf625f2ed0fd702fed2c784c3b15c532ca0
     }
 	
-    stage('Task Definition Creation')
+    stage('Fargate TaskDefinition Creation')
     withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
 	{
 	echo "${taskfamily1}"
-//	sh 'sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${taskfamily}.json > ${taskfamily}-${BUILD_NUMBER}.json'
-	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc1 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
-        sh "aws ecs update-service --cluster ecs-fargate-cluster-test1 --service ecs-fargate-cluster-svc1 --task-definition ecs-fargate-cluster-svc1 --desired-count 1 --region us-east-1"
+	sh 'aws ecs register-task-definition --family ecs-fargate-cluster-svc4 --cli-input-json file://ecs-fargate-cluster-svc1.json --region us-east-1'
+    }
+	  
+    stage('Deploy to Fargate Cluster')
+    withAWS(role:'AdminAccess-IAM-Role', roleAccount:'474173922354')
+	{
+	echo "${taskfamily1}"
+        //sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count 2 --region us-east-1"
+	sh "aws ecs update-service --cluster ecs-fargate-cluster-test4 --service ecs-fargate-cluster-svc4 --task-definition ecs-fargate-cluster-svc4 --desired-count ${taskcount} --region us-east-1"
     }
 }
